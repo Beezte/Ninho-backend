@@ -1,0 +1,37 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+<div class="container">
+
+    <hr>
+    <h2>Produtos</h2>
+    <a href="/produto/novo" class="btn btn-success">Criar novo produto</a>
+    <hr>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Titulo</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% produtos.forEach(produto =>{ %>
+                <tr>
+                    <td><%= produto.titulo %></td>
+                    <td><%= produto.descricao %></td>
+                    <td>
+                        <a href="/produto/edit/<%= produto.id %>" class="btn btn-warning">Editar</a>
+                        <form action="/produto/delete" method="POST" onsubmit="return confirm ('Tem certeza que deseja deletar?')" style="display: inline">
+                            <input type="hidden" name="id" value="<%= produto.id %>">
+                            <button type="submit" class="btn btn-danger">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+
+    </table>
+</div>
+
+<%- include('../partials/footer') %>
