@@ -51,4 +51,34 @@ router.post("/produto/delete", (req, res)=>{
     }
 })
 
+router.get("/produto/edit/:id", (req, res)=>{
+    var id = req.params.id;
+    if(isNaN(id)){
+        res.redirect("/produtos");
+    }
+    Produto.findByPk(id).then(produto=>{
+        if(produto !== undefined){
+            res.render("produtos/edit", {produto : produto});
+        }else{
+            res.redirect("/produtos");
+        }
+    }).catch(erro=>{
+        res.redirect("/produtos");
+    })
+})
+router.post("/produto/edit", (req, res)=>{
+    var id = req.body.id;
+    var titulo = req.body.titulo;
+    var descricao = req.body.descricao;
+    Produto.update({titulo : titulo, descricao : descricao}, {
+        where : {
+            id : id
+        }
+    }).then(()=>{
+        res.redirect("/produtos");
+    }).catch(erro=>{
+        res.redirect("/");
+    });
+});
+
 module.exports = router;

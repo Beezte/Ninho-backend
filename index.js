@@ -4,8 +4,11 @@ const bodyParser = require("body-parser");
 const connection = require("./database/database");
 
 const Produto = require("./produtos/Produto");
+const User = require("./users/User");
 const produtoController = require("./produtos/produtoController");
+const userController = require("./users/userController");
 
+app.use("/", userController);
 app.use("/", produtoController);
 
 connection
@@ -35,7 +38,5 @@ app.listen(8000, ()=>{
 app.get("/", (req, res)=>{
     res.render("index");
 });
-app.get("produtos/index", (req, res)=>{
-    res.render("./produto/index");
-});
+
 

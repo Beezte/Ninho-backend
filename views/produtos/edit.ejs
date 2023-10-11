@@ -8,13 +8,13 @@
         </div>
         <div class="card-body">
             <form action="/produto/edit" method="post">
+                <input type="hidden" name="id" value="<%= produto.id %>">
                 <label>Titulo</label>
                 <input type="text" name="titulo" id="tituloid" class="form-control" value="<%= produto.titulo %>">
 
                 <label>Descrição</label>
                 <textarea name="descricao" id="descProd"
-                          class="form-control" cols="30" rows="10" value="<%= produto.descricao %>">
-                          </textarea>
+                          class="form-control" cols="30" rows="10" ><%= produto.descricao %></textarea>
                 <button class="btn btn-primary">Confirmar</button>
             </form>
         </div>
